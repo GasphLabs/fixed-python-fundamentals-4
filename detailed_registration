@@ -1,0 +1,63 @@
+ogrenciler = []
+ayrac = '-' * 10
+
+def bos_mu(cevap):
+    if not cevap:
+        print('Boş cevap girdiniz. Tekrar deneyin.')
+    return
+
+while True:
+
+    menu_cevap = input(
+        f'{ayrac} MENÜ {ayrac}\n Tuşlayınız...\n\n1: Kayıt yapın.\n2: Kayıtları görüntüleyin.\n3: Menüden çıkın.'
+        ).strip()
+
+    while True:
+        if menu_cevap == '1':
+            
+            while True:
+                isim = input('İsminiz: ')
+                
+                if not isim:
+                    print('İsim kısmı boş bırakılamaz. Tekrar deneyin.')
+                    continue
+
+                for birim in isim:
+                    if birim.isdigit():
+                        print('İsminizin içine sayı girdiniz. Tekrar deneyin.')
+                        break
+                else:
+                    break
+            
+            while True:
+                yas = int(input('Yaşınız: '))
+                if yas.isdigit():
+                    break
+                else:
+                    print('Yanlış girdiniz.')
+
+            while True:
+                print('Sınıfınızı girin\nŞubenizi girin')
+                sinif = int(input(': '))
+                if sinif > 12:
+                    print('Yanlış girdiniz.')
+                elif sinif < 1:
+                    print('Hata')
+                elif type(sinif) is not int:
+                    print('Yanlış girdiniz.')
+                    pass
+                else:
+                    print('Yanlış girdiniz.')
+
+            
+            sube = input(': ')
+            # Burada sınıf değeri ile şube değeri ayrı ayrı alınıp kontrol edilecek
+            # eğer bir yanlışlık görülürse döngü tekrar
+            print(f'-> {isim}, kaydınız yapıldı.')
+            break
+
+            ogrenciler.append({
+                'İsim': isim,
+                'Yaş': yas,
+                'Sınıf': sinif
+            })
