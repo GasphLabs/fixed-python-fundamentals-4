@@ -2,62 +2,104 @@ ogrenciler = []
 ayrac = '-' * 10
 
 def bos_mu(cevap):
-    if not cevap:
+    cevap_stripped = cevap.strip()
+    if not cevap_stripped:
         print('Boş cevap girdiniz. Tekrar deneyin.')
-    return
+        return True
+    return False
 
 while True:
 
     menu_cevap = input(
-        f'{ayrac} MENÜ {ayrac}\n Tuşlayınız...\n\n1: Kayıt yapın.\n2: Kayıtları görüntüleyin.\n3: Menüden çıkın.'
+        f'{ayrac} MENÜ {ayrac}\n Tuşlayınız...\n\n1: Kayıt yapın.\n2: Kayıtları görüntüleyin.\n3: Menüden çıkın.\n\n'
         ).strip()
+    
+    if bos_mu(menu_cevap):
+        continue
 
-    while True:
-        if menu_cevap == '1':
-            
-            while True:
-                isim = input('İsminiz: ')
+    if menu_cevap not in ['1', '2', '3']:
+        print('Cevabınız menünde bulunmuyor. Tekrar deneyin.\n')
+        continue
+
+            # -------- 1. KISIM --------
+    if menu_cevap == '1':
+
+            # -------- İSİM ---------
+        while True:
+            isim = input('İsminiz: ')
+
+            if bos_mu(isim): 
+                continue
+
+            for birim in isim:
+                if birim.isdigit():
+                    print('İsminizin içine sayı girdiniz. Tekrar deneyin.\n')
+                    break
+            else:
+                break
+            # -------- YAŞ ---------
+        while True:
+            yas = input('Yaşınız: ')
+
+            if bos_mu(yas):
+                continue
                 
-                if not isim:
-                    print('İsim kısmı boş bırakılamaz. Tekrar deneyin.')
+            cevaba_harf_girmis_mi = False
+
+            for birim in yas:
+                if not birim.isdigit():
+                    cevaba_harf_girmis_mi = True
+
+                # eger true ise calisir false ise calismaz otomatik olarak false diyoruz yani  
+                # kodun aslinda calismamasi gerek tek calisacagi durum true oldugu zaman
+                # yani aslinda bu kodun calisacagi tek durum cevaba harf girildigi durumdur
+                # alttaki not ile de eger cevapta harf bulunur ise true durumunu false yapmasi icin
+
+            if cevaba_harf_girmis_mi:
+                print('Yaşınızın içine harf girdiniz. Tekrar deneyin\n')
+                
+            elif not cevaba_harf_girmis_mi:
+                break
+            
+            # -------- SINIF / ŞUBE ---------
+        while True: 
+
+            sinif = input('Sınıfınızı girin (Şube eklemeden): ')
+
+            if bos_mu(sinif):
+                continue
+
+            for birim in sinif:
+                if not sinif.isdigit():
+                    print('Sınıfınız için harf girdiniz. Tekrar deneyin\n')
                     continue
-
-                for birim in isim:
-                    if birim.isdigit():
-                        print('İsminizin içine sayı girdiniz. Tekrar deneyin.')
-                        break
-                else:
-                    break
+                
+            else:
+                break
             
-            while True:
-                yas = int(input('Yaşınız: '))
-                if yas.isdigit():
-                    break
-                else:
-                    print('Yanlış girdiniz.')
+        while True:
+                
+            sube = input('Şubenizi girin (Sınıf eklemeden): ')
+                
+            if bos_mu(sube):
+                continue
 
-            while True:
-                print('Sınıfınızı girin\nŞubenizi girin')
-                sinif = int(input(': '))
-                if sinif > 12:
-                    print('Yanlış girdiniz.')
-                elif sinif < 1:
-                    print('Hata')
-                elif type(sinif) is not int:
-                    print('Yanlış girdiniz.')
-                    pass
-                else:
-                    print('Yanlış girdiniz.')
+            for birim in sube:
+                if birim.isdigit():
+                    print('Şubeye sayı girdiniz. Tekrar deneyin.\n')
+                    continue
+            else:
+                break
 
+        print(f'-> {isim}, kaydınız yapıldı.')
             
-            sube = input(': ')
-            # Burada sınıf değeri ile şube değeri ayrı ayrı alınıp kontrol edilecek
-            # eğer bir yanlışlık görülürse döngü tekrar
-            print(f'-> {isim}, kaydınız yapıldı.')
-            break
+        ogrenciler.append({
+            'İsim': isim,
+            'Yaş': yas,
+            'Sınıf': sinif
+        })
 
-            ogrenciler.append({
-                'İsim': isim,
-                'Yaş': yas,
-                'Sınıf': sinif
-            })
+    nasil_istersin = input('Menüye dönmek için \'M\', çıkmak için \'Q\'ya  basın')
+
+    if nasil_istersin == 'M' or 'm':
+        continue
