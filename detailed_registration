@@ -1,43 +1,45 @@
+import string
 ogrenciler = []
 ayrac = '-' * 10
 
 def bos_mu(cevap):
     cevap_stripped = cevap.strip()
     if not cevap_stripped:
-        print('Boş cevap girdiniz. Tekrar deneyin.')
+        print('HATA: Boş cevap girdiniz. Tekrar deneyin.')
         return True
     return False
 
 while True:
 
     menu_cevap = input(
-        f'{ayrac} MENÜ {ayrac}\n Tuşlayınız...\n\n1: Kayıt yapın.\n2: Kayıtları görüntüleyin.\n3: Menüden çıkın.\n\n'
+        f'\n\n{ayrac} MENÜ {ayrac}\nTuşlayınız...\n\n1: Kayıt yapın.\n2: Kayıtları görüntüleyin.\n3: Menüden çıkın.\n\n'
         ).strip()
     
     if bos_mu(menu_cevap):
         continue
 
     if menu_cevap not in ['1', '2', '3']:
-        print('Cevabınız menünde bulunmuyor. Tekrar deneyin.\n')
+        print('HATA: Cevabınız menünde bulunmuyor. Tekrar deneyin.\n')
         continue
 
             # -------- 1. KISIM --------
     if menu_cevap == '1':
 
-            # -------- İSİM ---------
+            # -------- İSİM --------
         while True:
-            isim = input('İsminiz: ')
+            isim = input('\nİsminiz: ').strip()
 
             if bos_mu(isim): 
                 continue
 
             for birim in isim:
-                if birim.isdigit():
-                    print('İsminizin içine sayı girdiniz. Tekrar deneyin.\n')
+                if not birim.isalpha() and birim != ' ':
+                    print('HATA: Geçersiz karakter girdiniz. Tekrar deneyin.')
                     break
+
             else:
                 break
-            # -------- YAŞ ---------
+            # -------- YAŞ --------
         while True:
             yas = input('Yaşınız: ')
 
@@ -50,33 +52,44 @@ while True:
                 if not birim.isdigit():
                     cevaba_harf_girmis_mi = True
 
-                # eger true ise calisir false ise calismaz otomatik olarak false diyoruz yani  
-                # kodun aslinda calismamasi gerek tek calisacagi durum true oldugu zaman
-                # yani aslinda bu kodun calisacagi tek durum cevaba harf girildigi durumdur
-                # alttaki not ile de eger cevapta harf bulunur ise true durumunu false yapmasi icin
-
             if cevaba_harf_girmis_mi:
-                print('Yaşınızın içine harf girdiniz. Tekrar deneyin\n')
+                print('HATA: Yaşınızın içine harf girdiniz. Tekrar deneyin.\n')
+                continue
                 
             elif not cevaba_harf_girmis_mi:
-                break
-            
-            # -------- SINIF / ŞUBE ---------
+                if int(yas) < 6:
+                    print('HATA: Geçerli bir yaş girin.')
+                    continue
+                else:
+                    break
+                        
+            # -------- SINIF --------
         while True: 
 
             sinif = input('Sınıfınızı girin (Şube eklemeden): ')
 
             if bos_mu(sinif):
                 continue
+            
+            sinifa_harf_girdi_mi = False
 
             for birim in sinif:
-                if not sinif.isdigit():
-                    print('Sınıfınız için harf girdiniz. Tekrar deneyin\n')
-                    continue
-                
+                if not birim.isdigit():
+                    sinifa_harf_girdi_mi = True
+                    break
+            
+            if sinifa_harf_girdi_mi:
+                print('HATA: Sınıfınız için harf girdiniz. Tekrar deneyin.\n')
+                continue
+
+            if int(sinif) > 12 or int(sinif) < 1:
+                print('HATA: Geçersiz sınıf girdiniz. Tekrar deneyin.'),
+                continue
+
             else:
                 break
-            
+
+            # -------- ŞUBE --------
         while True:
                 
             sube = input('Şubenizi girin (Sınıf eklemeden): ')
@@ -84,22 +97,63 @@ while True:
             if bos_mu(sube):
                 continue
 
+            subede_sayi_var_mi = False
+
             for birim in sube:
                 if birim.isdigit():
-                    print('Şubeye sayı girdiniz. Tekrar deneyin.\n')
-                    continue
+                    subede_sayi_var_mi = True
+                    break
+            
+            if subede_sayi_var_mi:
+                print('HATA: Şubeye sayı girdiniz. Tekrar deneyin.\n')
+                continue
+
+            if len(sube) > 1:
+                print('HATA: Şubeniz için tek karakter girin')
+                continue
+            
+            if sube not in string.ascii_letters:
+                print('HATA: Şubeniz mevcut değil. Geçerli bir şube girin.')
+                continue
+
             else:
                 break
 
-        print(f'-> {isim}, kaydınız yapıldı.')
+        print(f'\n-> {isim}, kaydınız yapıldı.')
             
         ogrenciler.append({
             'İsim': isim,
             'Yaş': yas,
-            'Sınıf': sinif
+            'Sınıf': sinif,
+            'Şube': sube
         })
 
-    nasil_istersin = input('Menüye dönmek için \'M\', çıkmak için \'Q\'ya  basın')
+        while True:
 
-    if nasil_istersin == 'M' or 'm':
+            nasil_istersin = input('Menüye dönmek için \'M\', çıkmak için \'Q\'ya  basın')
+
+            if nasil_istersin == 'M' or 'm':
+                break
+
+            elif nasil_istersin == 'Q' or 'q':
+                exit()
+
+            else:
+                print('HATA: Hatalı tuşladınız. Tekrar deneyin.')
+                continue
+
         continue
+
+    # -------- 2. KISIM --------
+    elif menu_cevap == '2':
+    
+        while True:
+
+            if not ogrenciler:
+                print('Kayıtlı öğrenci bulunmuyor')
+
+            else:
+                pass
+
+            for i, ogrenci in enumerate(ogrenciler, 1):
+                print(f'{i}. Öğrenci: {ogrenci}')
