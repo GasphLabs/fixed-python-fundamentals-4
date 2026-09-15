@@ -1,4 +1,4 @@
-import string
+ import string
 ogrenciler = []
 ayrac = '-' * 10
 
@@ -130,12 +130,12 @@ while True:
 
         while True:
 
-            nasil_istersin = input('Menüye dönmek için \'M\', çıkmak için \'Q\'ya  basın')
+            nasil_istersin = input('Menüye dönmek için \'M\', çıkmak için \'Q\'ya  basın\n\n')
 
-            if nasil_istersin == 'M' or 'm':
+            if nasil_istersin in ['M', 'm']:
                 break
 
-            elif nasil_istersin == 'Q' or 'q':
+            elif nasil_istersin in ['Q', 'q']:
                 exit()
 
             else:
@@ -156,4 +156,25 @@ while True:
                 pass
 
             for i, ogrenci in enumerate(ogrenciler, 1):
-                print(f'{i}. Öğrenci: {ogrenci}')
+                print(f'\n{i}. Öğrenci:\n {ayrac} \n İsim: {ogrenci['İsim']}\n Yaş: {ogrenci['Yaş']}\n Sınıf: {ogrenci['Sınıf']}\n Şube: {ogrenci['Şube']}')
+            
+            break
+
+        nasil_istersin = input('Menüye dönmek için \'M\', çıkmak için \'Q\'ya  basın\n\n')
+
+        if nasil_istersin in ['M', 'm']:
+            break
+
+        elif nasil_istersin in ['Q', 'q']:
+            exit()
+
+        else:
+            print('HATA: Hatalı tuşladınız. Tekrar deneyin.')
+            continue
+
+        continue
+
+    # -------- 3. KISIM --------
+
+    if menu_cevap == '3':
+        exit()
