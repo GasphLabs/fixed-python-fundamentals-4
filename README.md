@@ -1,1 +1,1 @@
-# to-be-fixed---python-fundamentals-4
+In this repo I made a project with the current knowledge I've had from the progress. Basically it's a student registration menu code but what makes this different than my other repos is the extra codes for detecting an error and asking for a correct answer again. Also from now on I'll be using english as primary language while writing code so it will be much more easy to understand for everyone, I hope.
