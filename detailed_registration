@@ -1,4 +1,4 @@
- import string
+import string
 ogrenciler = []
 ayrac = '-' * 10
 
@@ -66,7 +66,7 @@ while True:
             # -------- SINIF --------
         while True: 
 
-            sinif = input('Sınıfınızı girin (Şube eklemeden): ')
+            sinif = input('Sınıfınızı girin (Şube eklemeden): ').strip()
 
             if bos_mu(sinif):
                 continue
@@ -83,7 +83,7 @@ while True:
                 continue
 
             if int(sinif) > 12 or int(sinif) < 1:
-                print('HATA: Geçersiz sınıf girdiniz. Tekrar deneyin.'),
+                print('HATA: Geçersiz sınıf girdiniz. Tekrar deneyin.')
                 continue
 
             else:
@@ -162,15 +162,17 @@ while True:
 
         nasil_istersin = input('Menüye dönmek için \'M\', çıkmak için \'Q\'ya  basın\n\n')
 
-        if nasil_istersin in ['M', 'm']:
-            break
+        while True:
+        
+            if nasil_istersin in ['M', 'm']:
+                break
 
-        elif nasil_istersin in ['Q', 'q']:
-            exit()
+            elif nasil_istersin in ['Q', 'q']:
+                exit()
 
-        else:
-            print('HATA: Hatalı tuşladınız. Tekrar deneyin.')
-            continue
+            else:
+                print('HATA: Hatalı tuşladınız. Tekrar deneyin.')
+                continue
 
         continue
 
